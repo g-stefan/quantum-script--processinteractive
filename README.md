@@ -1,2 +1,27 @@
-# quantum-script-extension-processinteractive
-Quantum Script Extension ProcessInteractive
+# Quantum Script Extension ProcessInteractive
+
+ProcessInteractive;\
+ProcessInteractive.isProcessInteractive(x);\
+ProcessInteractive.prototype.execute(cmd);\
+ProcessInteractive.prototype.read(size);\
+ProcessInteractive.prototype.readLn(size);\
+ProcessInteractive.prototype.write(str);\
+ProcessInteractive.prototype.writeLn(str);\
+ProcessInteractive.prototype.close();\
+ProcessInteractive.prototype.terminate(waitMicroSec);\
+ProcessInteractive.prototype.waitToRead(microSec);\
+ProcessInteractive.prototype.readToBuffer(buffer);\
+ProcessInteractive.prototype.writeFromBuffer(buffer);\
+ProcessInteractive.prototype.becomeOwner(socket);\
+ProcessInteractive.prototype.linkOwner(socket);\
+ProcessInteractive.prototype.unLinkOwner(socket);\
+ProcessInteractive.prototype.transferOwner(socket);\
+ProcessInteractive.prototype.join();\
+ProcessInteractive.prototype.isRunning();\
+ProcessInteractive.prototype.getReturnValue();
+
+## License
+
+Copyright (c) Grigore Stefan
+
+Licensed under the [MIT](LICENSE) license.

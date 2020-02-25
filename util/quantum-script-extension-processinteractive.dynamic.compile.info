@@ -1,0 +1,9 @@
+--dll qse-processinteractive
+--project-base=quantum-script-extension-processinteractive
+--source-is-separate
+--dll-no-version
+--use-project=quantum-script
+--use-project=qse-buffer
+--install-dev
+--install-inc=quantum-script-extension
+--no-version

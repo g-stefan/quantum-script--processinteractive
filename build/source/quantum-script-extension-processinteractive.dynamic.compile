@@ -1,6 +1,6 @@
 --dll qse-processinteractive
 --project-base=quantum-script-extension-processinteractive
---source-is-separate
+--build-include
 --dll-no-version
 --use-project=quantum-script
 --use-project=qse-buffer

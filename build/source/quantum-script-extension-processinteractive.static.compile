@@ -1,6 +1,6 @@
 --lib qse-processinteractive
 --project-base=quantum-script-extension-processinteractive
---source-is-separate
+--build-include
 --use-project=quantum-script.static
 --use-project=qse-buffer.static
 --install-dev

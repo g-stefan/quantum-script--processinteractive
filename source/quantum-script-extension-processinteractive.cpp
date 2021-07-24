@@ -66,7 +66,7 @@ namespace Quantum {
 					processInteractiveContext->prototypeProcessInteractive.newMemory();
 
 					defaultPrototypeFunction = (VariableFunction *)VariableFunction::newVariable(nullptr, nullptr, nullptr, functionProcessInteractive, nullptr, nullptr);
-					((Context::getGlobalObject())->operatorReferenceOwnProperty(processInteractiveContext->symbolFunctionProcessInteractive))=defaultPrototypeFunction;
+					(Context::getGlobalObject())->setPropertyBySymbol(processInteractiveContext->symbolFunctionProcessInteractive,defaultPrototypeFunction);
 					processInteractiveContext->prototypeProcessInteractive = defaultPrototypeFunction->prototype;
 
 				};
@@ -75,7 +75,7 @@ namespace Quantum {
 #ifdef QUANTUM_SCRIPT_DEBUG_RUNTIME
 					printf("- script-is-processinteractive\n");
 #endif
-					return VariableBoolean::newVariable(VariableProcessInteractive::isVariableProcessInteractive(arguments->index(0)));
+					return VariableBoolean::newVariable(TIsType<VariableProcessInteractive>(arguments->index(0)));
 				};
 
 				static TPointer<Variable> processInteractiveExecute(VariableFunction *function, Variable *this_, VariableArray *arguments) {
@@ -83,7 +83,7 @@ namespace Quantum {
 					printf("- processinteractive-execute\n");
 #endif
 
-					if(!VariableProcessInteractive::isVariableProcessInteractive(this_)) {
+					if(!TIsType<VariableProcessInteractive>(this_)) {
 						throw(Error("invalid parameter"));
 					};
 
@@ -103,11 +103,11 @@ namespace Quantum {
 					size_t k;
 					char buffer[16384];
 
-					if(!VariableProcessInteractive::isVariableProcessInteractive(this_)) {
+					if(!TIsType<VariableProcessInteractive>(this_)) {
 						throw(Error("invalid parameter"));
 					};
 
-					if(VariableUndefined::isVariableUndefined(arguments->index(0))) {
+					if(TIsTypeExact<VariableUndefined>(arguments->index(0))) {
 						ln = 16384;
 					} else {
 
@@ -156,11 +156,11 @@ namespace Quantum {
 					String  retV;
 					Number ln;
 
-					if(!VariableProcessInteractive::isVariableProcessInteractive(this_)) {
+					if(!TIsType<VariableProcessInteractive>(this_)) {
 						throw(Error("invalid parameter"));
 					};
 
-					if(VariableUndefined::isVariableUndefined(arguments->index(0))) {
+					if(TIsTypeExact<VariableUndefined>(arguments->index(0))) {
 						ln = 16384;
 					} else {
 
@@ -183,7 +183,7 @@ namespace Quantum {
 					printf("- processinteractive-write\n");
 #endif
 
-					if(!VariableProcessInteractive::isVariableProcessInteractive(this_)) {
+					if(!TIsType<VariableProcessInteractive>(this_)) {
 						throw(Error("invalid parameter"));
 					};
 
@@ -199,7 +199,7 @@ namespace Quantum {
 					printf("- processinteractive-write-ln\n");
 #endif
 
-					if(!VariableProcessInteractive::isVariableProcessInteractive(this_)) {
+					if(!TIsType<VariableProcessInteractive>(this_)) {
 						throw(Error("invalid parameter"));
 					};
 
@@ -215,7 +215,7 @@ namespace Quantum {
 					printf("- processinteractive-close\n");
 #endif
 
-					if(!VariableProcessInteractive::isVariableProcessInteractive(this_)) {
+					if(!TIsType<VariableProcessInteractive>(this_)) {
 						throw(Error("invalid parameter"));
 					};
 
@@ -229,7 +229,7 @@ namespace Quantum {
 					printf("- processinteractive-terminate\n");
 #endif
 
-					if(!VariableProcessInteractive::isVariableProcessInteractive(this_)) {
+					if(!TIsType<VariableProcessInteractive>(this_)) {
 						throw(Error("invalid parameter"));
 					};
 
@@ -243,7 +243,7 @@ namespace Quantum {
 					printf("- processinteractive-wait-to-read\n");
 #endif
 
-					if(!VariableProcessInteractive::isVariableProcessInteractive(this_)) {
+					if(!TIsType<VariableProcessInteractive>(this_)) {
 						throw(Error("invalid parameter"));
 					};
 
@@ -266,17 +266,17 @@ namespace Quantum {
 					size_t k;
 					Number ln;
 
-					if(!VariableProcessInteractive::isVariableProcessInteractive(this_)) {
+					if(!TIsType<VariableProcessInteractive>(this_)) {
 						throw(Error("invalid parameter"));
 					};
 
 					TPointerX<Variable> &buffer(arguments->index(0));
 
-					if(!Extension::Buffer::VariableBuffer::isVariableBuffer(buffer)) {
+					if(!TIsType<Extension::Buffer::VariableBuffer>(buffer)) {
 						throw(Error("invalid parameter"));
 					};
 
-					if(VariableUndefined::isVariableUndefined(arguments->index(1))) {
+					if(TIsTypeExact<VariableUndefined>(arguments->index(1))) {
 						ln = 16384;
 					} else {
 
@@ -320,13 +320,13 @@ namespace Quantum {
 					printf("- processinteractive-write-from-buffer\n");
 #endif
 
-					if(!VariableProcessInteractive::isVariableProcessInteractive(this_)) {
+					if(!TIsType<VariableProcessInteractive>(this_)) {
 						throw(Error("invalid parameter"));
 					};
 
 					TPointerX<Variable> &buffer(arguments->index(0));
 
-					if(!Extension::Buffer::VariableBuffer::isVariableBuffer(buffer)) {
+					if(!TIsType<Extension::Buffer::VariableBuffer>(buffer)) {
 						throw(Error("invalid parameter"));
 					};
 
@@ -340,13 +340,13 @@ namespace Quantum {
 					printf("- processinteractive-become-owner\n");
 #endif
 
-					if(!VariableProcessInteractive::isVariableProcessInteractive(this_)) {
+					if(!TIsType<VariableProcessInteractive>(this_)) {
 						throw(Error("invalid parameter"));
 					};
 
 					TPointerX<Variable> &value = arguments->index(0);
 
-					if(!VariableProcessInteractive::isVariableProcessInteractive(value)) {
+					if(!TIsType<VariableProcessInteractive>(value)) {
 						throw(Error("invalid parameter"));
 					};
 
@@ -360,13 +360,13 @@ namespace Quantum {
 					printf("- processinteractive-link-owner\n");
 #endif
 
-					if(!VariableProcessInteractive::isVariableProcessInteractive(this_)) {
+					if(!TIsType<VariableProcessInteractive>(this_)) {
 						throw(Error("invalid parameter"));
 					};
 
 					TPointerX<Variable> &value = arguments->index(0);
 
-					if(!VariableProcessInteractive::isVariableProcessInteractive(value)) {
+					if(!TIsType<VariableProcessInteractive>(value)) {
 						throw(Error("invalid parameter"));
 					};
 
@@ -380,7 +380,7 @@ namespace Quantum {
 					printf("- processinteractive-unlink-owner\n");
 #endif
 
-					if(!VariableProcessInteractive::isVariableProcessInteractive(this_)) {
+					if(!TIsType<VariableProcessInteractive>(this_)) {
 						throw(Error("invalid parameter"));
 					};
 
@@ -395,13 +395,13 @@ namespace Quantum {
 					printf("- processinteractive-transfer-owner\n");
 #endif
 
-					if(!VariableProcessInteractive::isVariableProcessInteractive(this_)) {
+					if(!TIsType<VariableProcessInteractive>(this_)) {
 						throw(Error("invalid parameter"));
 					};
 
 					TPointerX<Variable> &value = arguments->index(0);
 
-					if(!VariableProcessInteractive::isVariableProcessInteractive(value)) {
+					if(!TIsType<VariableProcessInteractive>(value)) {
 						throw(Error("invalid parameter"));
 					};
 
@@ -416,7 +416,7 @@ namespace Quantum {
 					printf("- processinteractive-join\n");
 #endif
 
-					if(!VariableProcessInteractive::isVariableProcessInteractive(this_)) {
+					if(!TIsType<VariableProcessInteractive>(this_)) {
 						throw(Error("invalid parameter"));
 					};
 
@@ -430,7 +430,7 @@ namespace Quantum {
 					printf("- processinteractive-is-running\n");
 #endif
 
-					if(!VariableProcessInteractive::isVariableProcessInteractive(this_)) {
+					if(!TIsType<VariableProcessInteractive>(this_)) {
 						throw(Error("invalid parameter"));
 					};
 
@@ -442,7 +442,7 @@ namespace Quantum {
 					printf("- processinteractive-get-return-value\n");
 #endif
 
-					if(!VariableProcessInteractive::isVariableProcessInteractive(this_)) {
+					if(!TIsType<VariableProcessInteractive>(this_)) {
 						throw(Error("invalid parameter"));
 					};
 

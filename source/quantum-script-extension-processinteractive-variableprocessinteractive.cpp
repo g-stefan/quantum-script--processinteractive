@@ -27,20 +27,19 @@ namespace Quantum {
 
 				using namespace XYO;
 
-				const char *VariableProcessInteractive::typeProcessInteractiveKey = "{8287D24A-5799-4841-BBE9-300F45815FC0}";
-				const void *VariableProcessInteractive::typeProcessInteractive;
+				XYO_DYNAMIC_TYPE_IMPLEMENT(VariableProcessInteractive, "{8287D24A-5799-4841-BBE9-300F45815FC0}");
 				const char *VariableProcessInteractive::strTypeProcessInteractive = "ProcessInteractive";
 
-				String VariableProcessInteractive::getType() {
+				VariableProcessInteractive::VariableProcessInteractive() {
+					XYO_DYNAMIC_TYPE_PUSH(VariableProcessInteractive);
+				};
+
+				String VariableProcessInteractive::getVariableType() {
 					return strTypeProcessInteractive;
 				};
 
 				Variable *VariableProcessInteractive::newVariable() {
 					return (Variable *) TMemory<VariableProcessInteractive>::newMemory();
-				};
-
-				Variable &VariableProcessInteractive::operatorReference(Symbol symbolId) {
-					return operatorReferenceX(symbolId, (Extension::ProcessInteractive::getContext())->prototypeProcessInteractive->prototype);
 				};
 
 				Variable *VariableProcessInteractive::instancePrototype() {

@@ -15,5 +15,5 @@
 #include "quantum-script-extension-processinteractive-version.cpp"
 #endif
 
-#include "quantum-script-extension-processinteractive-variableprocessinteractive.cpp"
+#include "quantum-script-extension-processinteractive-variable.cpp"
 

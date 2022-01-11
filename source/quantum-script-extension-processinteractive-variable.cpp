@@ -17,8 +17,7 @@
 #include "quantum-script-variablestring.hpp"
 
 #include "quantum-script-extension-processinteractive.hpp"
-#include "quantum-script-extension-processinteractive-variableprocessinteractive.hpp"
-
+#include "quantum-script-extension-processinteractive-variable.hpp"
 
 namespace Quantum {
 	namespace Script {

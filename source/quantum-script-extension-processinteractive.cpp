@@ -25,7 +25,7 @@
 //
 #include "quantum-script-extension-buffer-variablebuffer.hpp"
 //
-#include "quantum-script-extension-processinteractive-variableprocessinteractive.hpp"
+#include "quantum-script-extension-processinteractive-variable.hpp"
 
 //#define QUANTUM_SCRIPT_VM_DEBUG_RUNTIME
 

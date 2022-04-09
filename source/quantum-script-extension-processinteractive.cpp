@@ -15,7 +15,7 @@
 #include "quantum-script-extension-processinteractive-license.hpp"
 #include "quantum-script-extension-processinteractive.hpp"
 #ifndef QUANTUM_SCRIPT_EXTENSION_PROCESSINTERACTIVE_NO_VERSION
-#include "quantum-script-extension-processinteractive-version.hpp"
+#	include "quantum-script-extension-processinteractive-version.hpp"
 #endif
 //
 #include "quantum-script-variableboolean.hpp"
@@ -66,9 +66,8 @@ namespace Quantum {
 					processInteractiveContext->prototypeProcessInteractive.newMemory();
 
 					defaultPrototypeFunction = (VariableFunction *)VariableFunction::newVariable(nullptr, nullptr, nullptr, functionProcessInteractive, nullptr, nullptr);
-					(Context::getGlobalObject())->setPropertyBySymbol(processInteractiveContext->symbolFunctionProcessInteractive,defaultPrototypeFunction);
+					(Context::getGlobalObject())->setPropertyBySymbol(processInteractiveContext->symbolFunctionProcessInteractive, defaultPrototypeFunction);
 					processInteractiveContext->prototypeProcessInteractive = defaultPrototypeFunction->prototype;
-
 				};
 
 				static TPointer<Variable> isProcessInteractive(VariableFunction *function, Variable *this_, VariableArray *arguments) {
@@ -83,18 +82,18 @@ namespace Quantum {
 					printf("- processinteractive-execute\n");
 #endif
 
-					if(!TIsType<VariableProcessInteractive>(this_)) {
+					if (!TIsType<VariableProcessInteractive>(this_)) {
 						throw(Error("invalid parameter"));
 					};
 
-					return VariableBoolean::newVariable(((VariableProcessInteractive *)( this_ ))->value.execute((arguments->index(0))->toString()));
+					return VariableBoolean::newVariable(((VariableProcessInteractive *)(this_))->value.execute((arguments->index(0))->toString()));
 				};
 
 				static TPointer<Variable> processInteractiveRead(VariableFunction *function, Variable *this_, VariableArray *arguments) {
 #ifdef QUANTUM_SCRIPT_DEBUG_RUNTIME
 					printf("- processinteractive-read\n");
 #endif
-					String  retV;
+					String retV;
 					Number ln;
 					size_t readLn;
 					size_t readToLn;
@@ -103,44 +102,43 @@ namespace Quantum {
 					size_t k;
 					char buffer[16384];
 
-					if(!TIsType<VariableProcessInteractive>(this_)) {
+					if (!TIsType<VariableProcessInteractive>(this_)) {
 						throw(Error("invalid parameter"));
 					};
 
-					if(TIsTypeExact<VariableUndefined>(arguments->index(0))) {
+					if (TIsTypeExact<VariableUndefined>(arguments->index(0))) {
 						ln = 16384;
 					} else {
 
 						ln = (arguments->index(0))->toNumber();
-						if(isnan(ln) || isinf(ln) || signbit(ln)) {
+						if (isnan(ln) || isinf(ln) || signbit(ln)) {
 							return Context::getValueUndefined();
 						};
-
 					};
 
 					readToLn = (size_t)(ln);
 					readTotal = 0;
 					readX = 16384;
-					if(readToLn < readX) {
+					if (readToLn < readX) {
 						readX = readToLn;
 					};
-					for(;;) {
-						readLn = ((VariableProcessInteractive *) this_)->value.read(buffer, readX);
+					for (;;) {
+						readLn = ((VariableProcessInteractive *)this_)->value.read(buffer, readX);
 
-						if(readLn > 0) {
+						if (readLn > 0) {
 							retV.concatenate(buffer, readLn);
 						};
-						//end of file
-						if(readLn < readX) {
+						// end of file
+						if (readLn < readX) {
 							break;
 						};
-						//end of read
+						// end of read
 						readTotal += readLn;
-						if(readTotal >= readToLn) {
+						if (readTotal >= readToLn) {
 							break;
 						};
 						readX = readToLn - readTotal;
-						if(readX > 16384) {
+						if (readX > 16384) {
 							readX = 16384;
 						};
 					};
@@ -148,30 +146,28 @@ namespace Quantum {
 					return VariableString::newVariable(retV);
 				};
 
-
 				static TPointer<Variable> processInteractiveReadLn(VariableFunction *function, Variable *this_, VariableArray *arguments) {
 #ifdef QUANTUM_SCRIPT_DEBUG_RUNTIME
 					printf("- processinteractive-read-ln\n");
 #endif
-					String  retV;
+					String retV;
 					Number ln;
 
-					if(!TIsType<VariableProcessInteractive>(this_)) {
+					if (!TIsType<VariableProcessInteractive>(this_)) {
 						throw(Error("invalid parameter"));
 					};
 
-					if(TIsTypeExact<VariableUndefined>(arguments->index(0))) {
+					if (TIsTypeExact<VariableUndefined>(arguments->index(0))) {
 						ln = 16384;
 					} else {
 
 						ln = (arguments->index(0))->toNumber();
-						if(isnan(ln) || isinf(ln) || signbit(ln)) {
+						if (isnan(ln) || isinf(ln) || signbit(ln)) {
 							return Context::getValueUndefined();
 						};
-
 					};
 
-					if(StreamX::readLn(((VariableProcessInteractive *) this_)->value, retV, ln)) {
+					if (StreamX::readLn(((VariableProcessInteractive *)this_)->value, retV, ln)) {
 						return VariableString::newVariable(retV);
 					};
 
@@ -183,31 +179,26 @@ namespace Quantum {
 					printf("- processinteractive-write\n");
 #endif
 
-					if(!TIsType<VariableProcessInteractive>(this_)) {
+					if (!TIsType<VariableProcessInteractive>(this_)) {
 						throw(Error("invalid parameter"));
 					};
 
 					String toWrite = (arguments->index(0))->toString();
-					return VariableNumber::newVariable((Number)(((VariableProcessInteractive *) this_)->value.write(
-									toWrite.value(), toWrite.length()
-								)));
+					return VariableNumber::newVariable((Number)(((VariableProcessInteractive *)this_)->value.write(toWrite.value(), toWrite.length())));
 				};
-
 
 				static TPointer<Variable> processInteractiveWriteLn(VariableFunction *function, Variable *this_, VariableArray *arguments) {
 #ifdef QUANTUM_SCRIPT_DEBUG_RUNTIME
 					printf("- processinteractive-write-ln\n");
 #endif
 
-					if(!TIsType<VariableProcessInteractive>(this_)) {
+					if (!TIsType<VariableProcessInteractive>(this_)) {
 						throw(Error("invalid parameter"));
 					};
 
 					String toWrite = (arguments->index(0))->toString();
 					toWrite << "\r\n";
-					return VariableNumber::newVariable((Number)(((VariableProcessInteractive *) this_)->value.write(
-									toWrite.value(), toWrite.length()
-								)));
+					return VariableNumber::newVariable((Number)(((VariableProcessInteractive *)this_)->value.write(toWrite.value(), toWrite.length())));
 				};
 
 				static TPointer<Variable> processInteractiveClose(VariableFunction *function, Variable *this_, VariableArray *arguments) {
@@ -215,11 +206,11 @@ namespace Quantum {
 					printf("- processinteractive-close\n");
 #endif
 
-					if(!TIsType<VariableProcessInteractive>(this_)) {
+					if (!TIsType<VariableProcessInteractive>(this_)) {
 						throw(Error("invalid parameter"));
 					};
 
-					((VariableProcessInteractive *) this_)->value.close();
+					((VariableProcessInteractive *)this_)->value.close();
 
 					return Context::getValueUndefined();
 				};
@@ -229,11 +220,11 @@ namespace Quantum {
 					printf("- processinteractive-terminate\n");
 #endif
 
-					if(!TIsType<VariableProcessInteractive>(this_)) {
+					if (!TIsType<VariableProcessInteractive>(this_)) {
 						throw(Error("invalid parameter"));
 					};
 
-					((VariableProcessInteractive *) this_)->value.terminate((arguments->index(0))->toIndex());
+					((VariableProcessInteractive *)this_)->value.terminate((arguments->index(0))->toIndex());
 
 					return Context::getValueUndefined();
 				};
@@ -243,17 +234,16 @@ namespace Quantum {
 					printf("- processinteractive-wait-to-read\n");
 #endif
 
-					if(!TIsType<VariableProcessInteractive>(this_)) {
+					if (!TIsType<VariableProcessInteractive>(this_)) {
 						throw(Error("invalid parameter"));
 					};
 
 					Number microSeconds = (arguments->index(0))->toNumber();
-					if(isnan(microSeconds) || isinf(microSeconds) || signbit(microSeconds)) {
+					if (isnan(microSeconds) || isinf(microSeconds) || signbit(microSeconds)) {
 						return VariableNumber::newVariable(NAN);
 					};
-					return VariableNumber::newVariable(((VariableProcessInteractive *) this_)->value.waitToRead((uint32_t)microSeconds));
+					return VariableNumber::newVariable(((VariableProcessInteractive *)this_)->value.waitToRead((uint32_t)microSeconds));
 				};
-
 
 				static TPointer<Variable> processInteractiveReadToBuffer(VariableFunction *function, Variable *this_, VariableArray *arguments) {
 #ifdef QUANTUM_SCRIPT_DEBUG_RUNTIME
@@ -266,46 +256,45 @@ namespace Quantum {
 					size_t k;
 					Number ln;
 
-					if(!TIsType<VariableProcessInteractive>(this_)) {
+					if (!TIsType<VariableProcessInteractive>(this_)) {
 						throw(Error("invalid parameter"));
 					};
 
 					TPointerX<Variable> &buffer(arguments->index(0));
 
-					if(!TIsType<Extension::Buffer::VariableBuffer>(buffer)) {
+					if (!TIsType<Extension::Buffer::VariableBuffer>(buffer)) {
 						throw(Error("invalid parameter"));
 					};
 
-					if(TIsTypeExact<VariableUndefined>(arguments->index(1))) {
+					if (TIsTypeExact<VariableUndefined>(arguments->index(1))) {
 						ln = 16384;
 					} else {
 
 						ln = (arguments->index(1))->toNumber();
-						if(isnan(ln) || signbit(ln) || ln == 0.0) {
+						if (isnan(ln) || signbit(ln) || ln == 0.0) {
 							((Extension::Buffer::VariableBuffer *)buffer.value())->buffer.length = 0;
 							return VariableNumber::newVariable(0);
 						};
-						if(isinf(ln)) {
+						if (isinf(ln)) {
 							ln = ((Extension::Buffer::VariableBuffer *)buffer.value())->buffer.size;
 						};
-
 					};
 
-					if(ln > ((Extension::Buffer::VariableBuffer *)buffer.value())->buffer.size) {
+					if (ln > ((Extension::Buffer::VariableBuffer *)buffer.value())->buffer.size) {
 						ln = ((Extension::Buffer::VariableBuffer *)buffer.value())->buffer.size;
 					};
 
 					readToLn = (size_t)ln;
 					readTotal = 0;
 					readX = readToLn;
-					for(;;) {
-						readLn = ((VariableProcessInteractive *) this_)->value.read(&(((Extension::Buffer::VariableBuffer *)buffer.value())->buffer.buffer)[readTotal], readX);
-						//end of transmision
-						if(readLn == 0) {
+					for (;;) {
+						readLn = ((VariableProcessInteractive *)this_)->value.read(&(((Extension::Buffer::VariableBuffer *)buffer.value())->buffer.buffer)[readTotal], readX);
+						// end of transmision
+						if (readLn == 0) {
 							break;
 						};
 						readTotal += readLn;
-						if(readTotal >= readToLn) {
+						if (readTotal >= readToLn) {
 							break;
 						};
 						readX = readToLn - readTotal;
@@ -314,25 +303,22 @@ namespace Quantum {
 					return VariableNumber::newVariable(readTotal);
 				};
 
-
 				static TPointer<Variable> processInteractiveWriteFromBuffer(VariableFunction *function, Variable *this_, VariableArray *arguments) {
 #ifdef QUANTUM_SCRIPT_DEBUG_RUNTIME
 					printf("- processinteractive-write-from-buffer\n");
 #endif
 
-					if(!TIsType<VariableProcessInteractive>(this_)) {
+					if (!TIsType<VariableProcessInteractive>(this_)) {
 						throw(Error("invalid parameter"));
 					};
 
 					TPointerX<Variable> &buffer(arguments->index(0));
 
-					if(!TIsType<Extension::Buffer::VariableBuffer>(buffer)) {
+					if (!TIsType<Extension::Buffer::VariableBuffer>(buffer)) {
 						throw(Error("invalid parameter"));
 					};
 
-					return VariableNumber::newVariable((Number)(((VariableProcessInteractive *) this_)->value.write(
-									((Extension::Buffer::VariableBuffer *)buffer.value())->buffer.buffer, ((Extension::Buffer::VariableBuffer *)buffer.value())->buffer.length
-								)));
+					return VariableNumber::newVariable((Number)(((VariableProcessInteractive *)this_)->value.write(((Extension::Buffer::VariableBuffer *)buffer.value())->buffer.buffer, ((Extension::Buffer::VariableBuffer *)buffer.value())->buffer.length)));
 				};
 
 				static TPointer<Variable> processInteractiveBecomeOwner(VariableFunction *function, Variable *this_, VariableArray *arguments) {
@@ -340,17 +326,17 @@ namespace Quantum {
 					printf("- processinteractive-become-owner\n");
 #endif
 
-					if(!TIsType<VariableProcessInteractive>(this_)) {
+					if (!TIsType<VariableProcessInteractive>(this_)) {
 						throw(Error("invalid parameter"));
 					};
 
 					TPointerX<Variable> &value = arguments->index(0);
 
-					if(!TIsType<VariableProcessInteractive>(value)) {
+					if (!TIsType<VariableProcessInteractive>(value)) {
 						throw(Error("invalid parameter"));
 					};
 
-					((VariableProcessInteractive *) this_)->value.becomeOwner(((VariableProcessInteractive *)(value.value()))->value);
+					((VariableProcessInteractive *)this_)->value.becomeOwner(((VariableProcessInteractive *)(value.value()))->value);
 
 					return Context::getValueUndefined();
 				};
@@ -360,17 +346,17 @@ namespace Quantum {
 					printf("- processinteractive-link-owner\n");
 #endif
 
-					if(!TIsType<VariableProcessInteractive>(this_)) {
+					if (!TIsType<VariableProcessInteractive>(this_)) {
 						throw(Error("invalid parameter"));
 					};
 
 					TPointerX<Variable> &value = arguments->index(0);
 
-					if(!TIsType<VariableProcessInteractive>(value)) {
+					if (!TIsType<VariableProcessInteractive>(value)) {
 						throw(Error("invalid parameter"));
 					};
 
-					((VariableProcessInteractive *) this_)->value.linkOwner(((VariableProcessInteractive *)(value.value()))->value);
+					((VariableProcessInteractive *)this_)->value.linkOwner(((VariableProcessInteractive *)(value.value()))->value);
 
 					return Context::getValueUndefined();
 				};
@@ -380,47 +366,45 @@ namespace Quantum {
 					printf("- processinteractive-unlink-owner\n");
 #endif
 
-					if(!TIsType<VariableProcessInteractive>(this_)) {
+					if (!TIsType<VariableProcessInteractive>(this_)) {
 						throw(Error("invalid parameter"));
 					};
 
-					((VariableProcessInteractive *) this_)->value.unLinkOwner();
+					((VariableProcessInteractive *)this_)->value.unLinkOwner();
 
 					return Context::getValueUndefined();
 				};
-
 
 				static TPointer<Variable> processInteractiveTransferOwner(VariableFunction *function, Variable *this_, VariableArray *arguments) {
 #ifdef QUANTUM_SCRIPT_DEBUG_RUNTIME
 					printf("- processinteractive-transfer-owner\n");
 #endif
 
-					if(!TIsType<VariableProcessInteractive>(this_)) {
+					if (!TIsType<VariableProcessInteractive>(this_)) {
 						throw(Error("invalid parameter"));
 					};
 
 					TPointerX<Variable> &value = arguments->index(0);
 
-					if(!TIsType<VariableProcessInteractive>(value)) {
+					if (!TIsType<VariableProcessInteractive>(value)) {
 						throw(Error("invalid parameter"));
 					};
 
-					((VariableProcessInteractive *) this_)->value.transferOwner(((VariableProcessInteractive *)(value.value()))->value);
+					((VariableProcessInteractive *)this_)->value.transferOwner(((VariableProcessInteractive *)(value.value()))->value);
 
 					return Context::getValueUndefined();
 				};
-
 
 				static TPointer<Variable> processInteractiveJoin(VariableFunction *function, Variable *this_, VariableArray *arguments) {
 #ifdef QUANTUM_SCRIPT_DEBUG_RUNTIME
 					printf("- processinteractive-join\n");
 #endif
 
-					if(!TIsType<VariableProcessInteractive>(this_)) {
+					if (!TIsType<VariableProcessInteractive>(this_)) {
 						throw(Error("invalid parameter"));
 					};
 
-					((VariableProcessInteractive *) this_)->value.join();
+					((VariableProcessInteractive *)this_)->value.join();
 
 					return Context::getValueUndefined();
 				};
@@ -430,11 +414,11 @@ namespace Quantum {
 					printf("- processinteractive-is-running\n");
 #endif
 
-					if(!TIsType<VariableProcessInteractive>(this_)) {
+					if (!TIsType<VariableProcessInteractive>(this_)) {
 						throw(Error("invalid parameter"));
 					};
 
-					return VariableBoolean::newVariable(((VariableProcessInteractive *)( this_ ))->value.isRunning());
+					return VariableBoolean::newVariable(((VariableProcessInteractive *)(this_))->value.isRunning());
 				};
 
 				static TPointer<Variable> processInteractiveGetReturnValue(VariableFunction *function, Variable *this_, VariableArray *arguments) {
@@ -442,13 +426,12 @@ namespace Quantum {
 					printf("- processinteractive-get-return-value\n");
 #endif
 
-					if(!TIsType<VariableProcessInteractive>(this_)) {
+					if (!TIsType<VariableProcessInteractive>(this_)) {
 						throw(Error("invalid parameter"));
 					};
 
-					return VariableNumber::newVariable(((VariableProcessInteractive *)( this_ ))->value.getReturnValue());
+					return VariableNumber::newVariable(((VariableProcessInteractive *)(this_))->value.getReturnValue());
 				};
-
 
 				void registerInternalExtension(Executive *executive) {
 					executive->registerInternalExtension("ProcessInteractive", initExecutive);
@@ -470,23 +453,23 @@ namespace Quantum {
 
 					executive->compileStringX("Script.requireExtension(\"Buffer\");");
 					executive->setFunction2("ProcessInteractive.isProcessInteractive(x)", isProcessInteractive);
-					executive->setFunction2("ProcessInteractive.prototype.execute(cmd)",  processInteractiveExecute);
-					executive->setFunction2("ProcessInteractive.prototype.read(size)",  processInteractiveRead);
-					executive->setFunction2("ProcessInteractive.prototype.readLn(size)",  processInteractiveReadLn);
-					executive->setFunction2("ProcessInteractive.prototype.write(str)",  processInteractiveWrite);
-					executive->setFunction2("ProcessInteractive.prototype.writeLn(str)",  processInteractiveWriteLn);
-					executive->setFunction2("ProcessInteractive.prototype.close()",  processInteractiveClose);
-					executive->setFunction2("ProcessInteractive.prototype.terminate(waitMicroSec)",  processInteractiveTerminate);
-					executive->setFunction2("ProcessInteractive.prototype.waitToRead(microSec)",  processInteractiveWaitToRead);
-					executive->setFunction2("ProcessInteractive.prototype.readToBuffer(buffer)",  processInteractiveReadToBuffer);
-					executive->setFunction2("ProcessInteractive.prototype.writeFromBuffer(buffer)",  processInteractiveWriteFromBuffer);
-					executive->setFunction2("ProcessInteractive.prototype.becomeOwner(processInteractive)",  processInteractiveBecomeOwner);
-					executive->setFunction2("ProcessInteractive.prototype.linkOwner(processInteractive)",  processInteractiveLinkOwner);
-					executive->setFunction2("ProcessInteractive.prototype.unLinkOwner(processInteractive)",  processInteractiveUnLinkOwner);
-					executive->setFunction2("ProcessInteractive.prototype.transferOwner(processInteractive)",  processInteractiveTransferOwner);
-					executive->setFunction2("ProcessInteractive.prototype.join()",  processInteractiveJoin);
-					executive->setFunction2("ProcessInteractive.prototype.isRunning()",  processInteractiveIsRunning);
-					executive->setFunction2("ProcessInteractive.prototype.getReturnValue()",  processInteractiveGetReturnValue);
+					executive->setFunction2("ProcessInteractive.prototype.execute(cmd)", processInteractiveExecute);
+					executive->setFunction2("ProcessInteractive.prototype.read(size)", processInteractiveRead);
+					executive->setFunction2("ProcessInteractive.prototype.readLn(size)", processInteractiveReadLn);
+					executive->setFunction2("ProcessInteractive.prototype.write(str)", processInteractiveWrite);
+					executive->setFunction2("ProcessInteractive.prototype.writeLn(str)", processInteractiveWriteLn);
+					executive->setFunction2("ProcessInteractive.prototype.close()", processInteractiveClose);
+					executive->setFunction2("ProcessInteractive.prototype.terminate(waitMicroSec)", processInteractiveTerminate);
+					executive->setFunction2("ProcessInteractive.prototype.waitToRead(microSec)", processInteractiveWaitToRead);
+					executive->setFunction2("ProcessInteractive.prototype.readToBuffer(buffer)", processInteractiveReadToBuffer);
+					executive->setFunction2("ProcessInteractive.prototype.writeFromBuffer(buffer)", processInteractiveWriteFromBuffer);
+					executive->setFunction2("ProcessInteractive.prototype.becomeOwner(processInteractive)", processInteractiveBecomeOwner);
+					executive->setFunction2("ProcessInteractive.prototype.linkOwner(processInteractive)", processInteractiveLinkOwner);
+					executive->setFunction2("ProcessInteractive.prototype.unLinkOwner(processInteractive)", processInteractiveUnLinkOwner);
+					executive->setFunction2("ProcessInteractive.prototype.transferOwner(processInteractive)", processInteractiveTransferOwner);
+					executive->setFunction2("ProcessInteractive.prototype.join()", processInteractiveJoin);
+					executive->setFunction2("ProcessInteractive.prototype.isRunning()", processInteractiveIsRunning);
+					executive->setFunction2("ProcessInteractive.prototype.getReturnValue()", processInteractiveGetReturnValue);
 				};
 
 			};
@@ -499,4 +482,3 @@ extern "C" QUANTUM_SCRIPT_EXTENSION_PROCESSINTERACTIVE_EXPORT void quantumScript
 	Quantum::Script::Extension::ProcessInteractive::initExecutive(executive, extensionId);
 };
 #endif
-

@@ -11,23 +11,23 @@
 #define QUANTUM_SCRIPT_EXTENSION_PROCESSINTERACTIVE_HPP
 
 #ifndef QUANTUM_SCRIPT_HPP
-#include "quantum-script.hpp"
+#	include "quantum-script.hpp"
 #endif
 
 #ifndef QUANTUM_SCRIPT_EXTENSION_PROCESSINTERACTIVE__EXPORT_HPP
-#include "quantum-script-extension-processinteractive--export.hpp"
+#	include "quantum-script-extension-processinteractive--export.hpp"
 #endif
 
 #ifndef QUANTUM_SCRIPT_EXTENSION_PROCESSINTERACTIVE_COPYRIGHT_HPP
-#include "quantum-script-extension-processinteractive-copyright.hpp"
+#	include "quantum-script-extension-processinteractive-copyright.hpp"
 #endif
 
 #ifndef QUANTUM_SCRIPT_EXTENSION_PROCESSINTERACTIVE_LICENSE_HPP
-#include "quantum-script-extension-processinteractive-license.hpp"
+#	include "quantum-script-extension-processinteractive-license.hpp"
 #endif
 
 #ifndef QUANTUM_SCRIPT_EXTENSION_PROCESSINTERACTIVE_VERSION_HPP
-#include "quantum-script-extension-processinteractive-version.hpp"
+#	include "quantum-script-extension-processinteractive-version.hpp"
 #endif
 
 namespace Quantum {
@@ -37,11 +37,10 @@ namespace Quantum {
 
 				using namespace Quantum::Script;
 
-				class ProcessInteractiveContext:
-					public Object {
+				class ProcessInteractiveContext : public Object {
 						XYO_DISALLOW_COPY_ASSIGN_MOVE(ProcessInteractiveContext);
-					public:
 
+					public:
 						Symbol symbolFunctionProcessInteractive;
 						TPointerX<Prototype> prototypeProcessInteractive;
 
@@ -59,4 +58,3 @@ namespace Quantum {
 };
 
 #endif
-

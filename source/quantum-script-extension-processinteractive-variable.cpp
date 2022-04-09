@@ -38,7 +38,7 @@ namespace Quantum {
 				};
 
 				Variable *VariableProcessInteractive::newVariable() {
-					return (Variable *) TMemory<VariableProcessInteractive>::newMemory();
+					return (Variable *)TMemory<VariableProcessInteractive>::newMemory();
 				};
 
 				Variable *VariableProcessInteractive::instancePrototype() {
@@ -52,7 +52,7 @@ namespace Quantum {
 				Variable *VariableProcessInteractive::clone(SymbolList &inSymbolList) {
 					VariableProcessInteractive *out = (VariableProcessInteractive *)newVariable();
 					out->value.becomeOwner(value);
-					return  out;
+					return out;
 				};
 
 				bool VariableProcessInteractive::toBoolean() {
@@ -67,5 +67,3 @@ namespace Quantum {
 		};
 	};
 };
-
-

@@ -11,7 +11,7 @@
 #define QUANTUM_SCRIPT_VARIABLEPROCESSINTERACTIVE_HPP
 
 #ifndef QUANTUM_SCRIPT_VARIABLE_HPP
-#include "quantum-script-variable.hpp"
+#	include "quantum-script-variable.hpp"
 #endif
 
 namespace Quantum {
@@ -26,15 +26,12 @@ namespace Quantum {
 	};
 };
 
-
 namespace XYO {
 	namespace ManagedMemory {
-		template<>
-		class TMemory<Quantum::Script::Extension::ProcessInteractive::VariableProcessInteractive>:
-			public TMemoryPoolActive<Quantum::Script::Extension::ProcessInteractive::VariableProcessInteractive> {};
+		template <>
+		class TMemory<Quantum::Script::Extension::ProcessInteractive::VariableProcessInteractive> : public TMemoryPoolActive<Quantum::Script::Extension::ProcessInteractive::VariableProcessInteractive> {};
 	};
 };
-
 
 namespace Quantum {
 	namespace Script {
@@ -43,14 +40,14 @@ namespace Quantum {
 
 				using namespace XYO;
 
-				class VariableProcessInteractive :
-					public Variable {
+				class VariableProcessInteractive : public Variable {
 						XYO_DISALLOW_COPY_ASSIGN_MOVE(VariableProcessInteractive);
 						XYO_DYNAMIC_TYPE_DEFINE(QUANTUM_SCRIPT_EXTENSION_PROCESSINTERACTIVE_EXPORT, VariableProcessInteractive);
+
 					protected:
 						QUANTUM_SCRIPT_EXTENSION_PROCESSINTERACTIVE_EXPORT static const char *strTypeProcessInteractive;
-					public:
 
+					public:
 						XYO::ProcessInteractive value;
 
 						QUANTUM_SCRIPT_EXTENSION_PROCESSINTERACTIVE_EXPORT VariableProcessInteractive();
@@ -69,12 +66,9 @@ namespace Quantum {
 						QUANTUM_SCRIPT_EXTENSION_PROCESSINTERACTIVE_EXPORT String toString();
 				};
 
-
 			};
 		};
 	};
 };
 
-
 #endif
-

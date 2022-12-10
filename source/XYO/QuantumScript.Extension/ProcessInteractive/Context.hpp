@@ -13,17 +13,17 @@
 
 namespace XYO::QuantumScript::Extension::ProcessInteractive {
 
-				class ProcessInteractiveContext : public Object {
-						XYO_DISALLOW_COPY_ASSIGN_MOVE(ProcessInteractiveContext);
+	class ProcessInteractiveContext : public Object {
+			XYO_DISALLOW_COPY_ASSIGN_MOVE(ProcessInteractiveContext);
 
-					public:
-						Symbol symbolFunctionProcessInteractive;
-						TPointerX<Prototype> prototypeProcessInteractive;
+		public:
+			Symbol symbolFunctionProcessInteractive;
+			TPointerX<Prototype> prototypeProcessInteractive;
 
-						XYO_QUANTUMSCRIPT_EXTENSION_PROCESSINTERACTIVE_EXPORT ProcessInteractiveContext();
-				};
+			XYO_QUANTUMSCRIPT_EXTENSION_PROCESSINTERACTIVE_EXPORT ProcessInteractiveContext();
+	};
 
-				XYO_QUANTUMSCRIPT_EXTENSION_PROCESSINTERACTIVE_EXPORT ProcessInteractiveContext *getContext();
+	XYO_QUANTUMSCRIPT_EXTENSION_PROCESSINTERACTIVE_EXPORT ProcessInteractiveContext *getContext();
 };
 
 #endif

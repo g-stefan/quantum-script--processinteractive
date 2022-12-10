@@ -15,42 +15,42 @@
 #endif
 
 namespace XYO::QuantumScript::Extension::ProcessInteractive {
-				class VariableProcessInteractive;
+	class VariableProcessInteractive;
 };
 
 namespace XYO::ManagedMemory {
-		template <>
-		class TMemory<XYO::QuantumScript::Extension::ProcessInteractive::VariableProcessInteractive> : public TMemoryPoolActive<XYO::QuantumScript::Extension::ProcessInteractive::VariableProcessInteractive> {};	
+	template <>
+	class TMemory<XYO::QuantumScript::Extension::ProcessInteractive::VariableProcessInteractive> : public TMemoryPoolActive<XYO::QuantumScript::Extension::ProcessInteractive::VariableProcessInteractive> {};
 };
 
 namespace XYO::QuantumScript::Extension::ProcessInteractive {
 
-				class VariableProcessInteractive : public Variable {
-						XYO_DISALLOW_COPY_ASSIGN_MOVE(VariableProcessInteractive);
-						XYO_DYNAMIC_TYPE_DEFINE(XYO_QUANTUMSCRIPT_EXTENSION_PROCESSINTERACTIVE_EXPORT, VariableProcessInteractive);
+	class VariableProcessInteractive : public Variable {
+			XYO_DISALLOW_COPY_ASSIGN_MOVE(VariableProcessInteractive);
+			XYO_DYNAMIC_TYPE_DEFINE(XYO_QUANTUMSCRIPT_EXTENSION_PROCESSINTERACTIVE_EXPORT, VariableProcessInteractive);
 
-					protected:
-						XYO_QUANTUMSCRIPT_EXTENSION_PROCESSINTERACTIVE_EXPORT static const char *strTypeProcessInteractive;
+		protected:
+			XYO_QUANTUMSCRIPT_EXTENSION_PROCESSINTERACTIVE_EXPORT static const char *strTypeProcessInteractive;
 
-					public:
-						XYO::System::ProcessInteractive value;
+		public:
+			XYO::System::ProcessInteractive value;
 
-						XYO_QUANTUMSCRIPT_EXTENSION_PROCESSINTERACTIVE_EXPORT VariableProcessInteractive();
+			XYO_QUANTUMSCRIPT_EXTENSION_PROCESSINTERACTIVE_EXPORT VariableProcessInteractive();
 
-						XYO_QUANTUMSCRIPT_EXTENSION_PROCESSINTERACTIVE_EXPORT void activeDestructor();
+			XYO_QUANTUMSCRIPT_EXTENSION_PROCESSINTERACTIVE_EXPORT void activeDestructor();
 
-						XYO_QUANTUMSCRIPT_EXTENSION_PROCESSINTERACTIVE_EXPORT static Variable *newVariable();
+			XYO_QUANTUMSCRIPT_EXTENSION_PROCESSINTERACTIVE_EXPORT static Variable *newVariable();
 
-						XYO_QUANTUMSCRIPT_EXTENSION_PROCESSINTERACTIVE_EXPORT String getVariableType();
+			XYO_QUANTUMSCRIPT_EXTENSION_PROCESSINTERACTIVE_EXPORT String getVariableType();
 
-						XYO_QUANTUMSCRIPT_EXTENSION_PROCESSINTERACTIVE_EXPORT Variable *instancePrototype();
+			XYO_QUANTUMSCRIPT_EXTENSION_PROCESSINTERACTIVE_EXPORT Variable *instancePrototype();
 
-						XYO_QUANTUMSCRIPT_EXTENSION_PROCESSINTERACTIVE_EXPORT Variable *clone(SymbolList &inSymbolList);
+			XYO_QUANTUMSCRIPT_EXTENSION_PROCESSINTERACTIVE_EXPORT Variable *clone(SymbolList &inSymbolList);
 
-						XYO_QUANTUMSCRIPT_EXTENSION_PROCESSINTERACTIVE_EXPORT bool toBoolean();
-						XYO_QUANTUMSCRIPT_EXTENSION_PROCESSINTERACTIVE_EXPORT String toString();
-				};
+			XYO_QUANTUMSCRIPT_EXTENSION_PROCESSINTERACTIVE_EXPORT bool toBoolean();
+			XYO_QUANTUMSCRIPT_EXTENSION_PROCESSINTERACTIVE_EXPORT String toString();
+	};
 
-			};
+};
 
 #endif

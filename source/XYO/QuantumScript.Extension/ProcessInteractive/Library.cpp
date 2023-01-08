@@ -410,6 +410,20 @@ namespace XYO::QuantumScript::Extension::ProcessInteractive {
 		return VariableNumber::newVariable(((VariableProcessInteractive *)(this_))->value.getReturnValue());
 	};
 
+	static TPointer<Variable> processInteractiveUseConPTY(VariableFunction *function, Variable *this_, VariableArray *arguments) {
+#ifdef XYO_QUANTUMSCRIPT_DEBUG_RUNTIME
+		printf("- processinteractive-use-con-pty\n");
+#endif
+
+		if (!TIsType<VariableProcessInteractive>(this_)) {
+			throw(Error("invalid parameter"));
+		};
+
+		((VariableProcessInteractive *)(this_))->value.useConPTY((arguments->index(0))->toBoolean());
+
+		return Context::getValueUndefined();
+	};
+
 	void registerInternalExtension(Executive *executive) {
 		executive->registerInternalExtension("ProcessInteractive", initExecutive);
 	};
@@ -445,6 +459,7 @@ namespace XYO::QuantumScript::Extension::ProcessInteractive {
 		executive->setFunction2("ProcessInteractive.prototype.join()", processInteractiveJoin);
 		executive->setFunction2("ProcessInteractive.prototype.isRunning()", processInteractiveIsRunning);
 		executive->setFunction2("ProcessInteractive.prototype.getReturnValue()", processInteractiveGetReturnValue);
+		executive->setFunction2("ProcessInteractive.prototype.useConPTY(value)", processInteractiveUseConPTY);
 	};
 
 };

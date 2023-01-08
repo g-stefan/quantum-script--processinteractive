@@ -20,6 +20,7 @@ ProcessInteractive.prototype.transferOwner(socket);
 ProcessInteractive.prototype.join();
 ProcessInteractive.prototype.isRunning();
 ProcessInteractive.prototype.getReturnValue();
+ProcessInteractive.prototype.useConPTY(value);
 ```
 
 ## License

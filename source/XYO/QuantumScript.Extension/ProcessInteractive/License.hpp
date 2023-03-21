@@ -13,8 +13,8 @@
 
 namespace XYO::QuantumScript::Extension::ProcessInteractive::License {
 
-	XYO_QUANTUMSCRIPT_EXTENSION_PROCESSINTERACTIVE_EXPORT const char *license();
-	XYO_QUANTUMSCRIPT_EXTENSION_PROCESSINTERACTIVE_EXPORT const char *shortLicense();
+	XYO_QUANTUMSCRIPT_EXTENSION_PROCESSINTERACTIVE_EXPORT std::string license();
+	XYO_QUANTUMSCRIPT_EXTENSION_PROCESSINTERACTIVE_EXPORT std::string shortLicense();
 
 };
 

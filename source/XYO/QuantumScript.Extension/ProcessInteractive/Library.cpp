@@ -431,7 +431,7 @@ namespace XYO::QuantumScript::Extension::ProcessInteractive {
 	void initExecutive(Executive *executive, void *extensionId) {
 
 		String info = "ProcessInteractive\r\n";
-		info << License::shortLicense();
+		info << License::shortLicense().c_str();
 
 		executive->setExtensionName(extensionId, "ProcessInteractive");
 		executive->setExtensionInfo(extensionId, info);

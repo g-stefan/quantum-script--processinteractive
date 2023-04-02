@@ -473,7 +473,7 @@ namespace XYO::QuantumScript::Extension::ProcessInteractive {
 		executive->setFunction2("ProcessInteractive.prototype.isRunning()", processInteractiveIsRunning);
 		executive->setFunction2("ProcessInteractive.prototype.getReturnValue()", processInteractiveGetReturnValue);
 		executive->setFunction2("ProcessInteractive.prototype.useConPTY(value)", processInteractiveUseConPTY);
-		executive->setFunction2("ProcessInteractive.run(cmd,useConPTY)", processRun);		
+		executive->setFunction2("ProcessInteractive.run(cmd,useConPTY)", processRun);
 
 		//
 		executive->compileStringX(librarySource);

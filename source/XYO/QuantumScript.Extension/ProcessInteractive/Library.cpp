@@ -10,6 +10,7 @@
 #include <XYO/QuantumScript.Extension/ProcessInteractive/Version.hpp>
 #include <XYO/QuantumScript.Extension/ProcessInteractive/VariableProcessInteractive.hpp>
 #include <XYO/QuantumScript.Extension/ProcessInteractive/Context.hpp>
+#include <XYO/QuantumScript.Extension/ProcessInteractive/Library.Source.cpp>
 #include <XYO/QuantumScript.Extension/Buffer/VariableBuffer.hpp>
 
 namespace XYO::QuantumScript::Extension::ProcessInteractive {
@@ -49,7 +50,7 @@ namespace XYO::QuantumScript::Extension::ProcessInteractive {
 
 	static TPointer<Variable> isProcessInteractive(VariableFunction *function, Variable *this_, VariableArray *arguments) {
 #ifdef XYO_QUANTUMSCRIPT_DEBUG_RUNTIME
-		printf("- script-is-processinteractive\n");
+		printf("- processinteractive-is-processinteractive\n");
 #endif
 		return VariableBoolean::newVariable(TIsType<VariableProcessInteractive>(arguments->index(0)));
 	};
@@ -424,6 +425,18 @@ namespace XYO::QuantumScript::Extension::ProcessInteractive {
 		return Context::getValueUndefined();
 	};
 
+	static TPointer<Variable> processRun(VariableFunction *function, Variable *this_, VariableArray *arguments) {
+#ifdef XYO_QUANTUMSCRIPT_DEBUG_RUNTIME
+		printf("- processinteractive-run\n");
+#endif
+		String retV;
+		if (XYO::System::ProcessInteractiveX::run(arguments->index(0)->toString(), retV, arguments->index(0)->toBoolean())) {
+			return VariableString::newVariable(retV);
+		};
+
+		return Context::getValueUndefined();
+	};
+
 	void registerInternalExtension(Executive *executive) {
 		executive->registerInternalExtension("ProcessInteractive", initExecutive);
 	};
@@ -460,6 +473,10 @@ namespace XYO::QuantumScript::Extension::ProcessInteractive {
 		executive->setFunction2("ProcessInteractive.prototype.isRunning()", processInteractiveIsRunning);
 		executive->setFunction2("ProcessInteractive.prototype.getReturnValue()", processInteractiveGetReturnValue);
 		executive->setFunction2("ProcessInteractive.prototype.useConPTY(value)", processInteractiveUseConPTY);
+		executive->setFunction2("ProcessInteractive.run(cmd,useConPTY)", processRun);		
+
+		//
+		executive->compileStringX(librarySource);
 	};
 
 };

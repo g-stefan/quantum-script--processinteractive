@@ -145,7 +145,7 @@ namespace XYO::QuantumScript::Extension::ProcessInteractive {
 			};
 		};
 
-		if (StreamX::readLn(((VariableProcessInteractive *)this_)->value, retV, ln)) {
+		if (Stream::readLn(((VariableProcessInteractive *)this_)->value, retV, ln)) {
 			return VariableString::newVariable(retV);
 		};
 
@@ -430,7 +430,7 @@ namespace XYO::QuantumScript::Extension::ProcessInteractive {
 		printf("- processinteractive-run\n");
 #endif
 		String retV;
-		if (XYO::System::ProcessInteractiveX::run(arguments->index(0)->toString(), retV, arguments->index(0)->toBoolean())) {
+		if (XYO::System::ProcessInteractive::run(arguments->index(0)->toString(), retV, arguments->index(0)->toBoolean())) {
 			return VariableString::newVariable(retV);
 		};
 

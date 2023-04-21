@@ -299,80 +299,6 @@ namespace XYO::QuantumScript::Extension::ProcessInteractive {
 		return VariableNumber::newVariable((Number)(((VariableProcessInteractive *)this_)->value.write(((Extension::Buffer::VariableBuffer *)buffer.value())->buffer.buffer, ((Extension::Buffer::VariableBuffer *)buffer.value())->buffer.length)));
 	};
 
-	static TPointer<Variable> processInteractiveBecomeOwner(VariableFunction *function, Variable *this_, VariableArray *arguments) {
-#ifdef XYO_QUANTUMSCRIPT_DEBUG_RUNTIME
-		printf("- processinteractive-become-owner\n");
-#endif
-
-		if (!TIsType<VariableProcessInteractive>(this_)) {
-			throw(Error("invalid parameter"));
-		};
-
-		TPointerX<Variable> &value = arguments->index(0);
-
-		if (!TIsType<VariableProcessInteractive>(value)) {
-			throw(Error("invalid parameter"));
-		};
-
-		((VariableProcessInteractive *)this_)->value.becomeOwner(((VariableProcessInteractive *)(value.value()))->value);
-
-		return Context::getValueUndefined();
-	};
-
-	static TPointer<Variable> processInteractiveLinkOwner(VariableFunction *function, Variable *this_, VariableArray *arguments) {
-#ifdef XYO_QUANTUMSCRIPT_DEBUG_RUNTIME
-		printf("- processinteractive-link-owner\n");
-#endif
-
-		if (!TIsType<VariableProcessInteractive>(this_)) {
-			throw(Error("invalid parameter"));
-		};
-
-		TPointerX<Variable> &value = arguments->index(0);
-
-		if (!TIsType<VariableProcessInteractive>(value)) {
-			throw(Error("invalid parameter"));
-		};
-
-		((VariableProcessInteractive *)this_)->value.linkOwner(((VariableProcessInteractive *)(value.value()))->value);
-
-		return Context::getValueUndefined();
-	};
-
-	static TPointer<Variable> processInteractiveUnLinkOwner(VariableFunction *function, Variable *this_, VariableArray *arguments) {
-#ifdef XYO_QUANTUMSCRIPT_DEBUG_RUNTIME
-		printf("- processinteractive-unlink-owner\n");
-#endif
-
-		if (!TIsType<VariableProcessInteractive>(this_)) {
-			throw(Error("invalid parameter"));
-		};
-
-		((VariableProcessInteractive *)this_)->value.unLinkOwner();
-
-		return Context::getValueUndefined();
-	};
-
-	static TPointer<Variable> processInteractiveTransferOwner(VariableFunction *function, Variable *this_, VariableArray *arguments) {
-#ifdef XYO_QUANTUMSCRIPT_DEBUG_RUNTIME
-		printf("- processinteractive-transfer-owner\n");
-#endif
-
-		if (!TIsType<VariableProcessInteractive>(this_)) {
-			throw(Error("invalid parameter"));
-		};
-
-		TPointerX<Variable> &value = arguments->index(0);
-
-		if (!TIsType<VariableProcessInteractive>(value)) {
-			throw(Error("invalid parameter"));
-		};
-
-		((VariableProcessInteractive *)this_)->value.transferOwner(((VariableProcessInteractive *)(value.value()))->value);
-
-		return Context::getValueUndefined();
-	};
-
 	static TPointer<Variable> processInteractiveJoin(VariableFunction *function, Variable *this_, VariableArray *arguments) {
 #ifdef XYO_QUANTUMSCRIPT_DEBUG_RUNTIME
 		printf("- processinteractive-join\n");
@@ -465,10 +391,6 @@ namespace XYO::QuantumScript::Extension::ProcessInteractive {
 		executive->setFunction2("ProcessInteractive.prototype.waitToRead(microSec)", processInteractiveWaitToRead);
 		executive->setFunction2("ProcessInteractive.prototype.readToBuffer(buffer)", processInteractiveReadToBuffer);
 		executive->setFunction2("ProcessInteractive.prototype.writeFromBuffer(buffer)", processInteractiveWriteFromBuffer);
-		executive->setFunction2("ProcessInteractive.prototype.becomeOwner(processInteractive)", processInteractiveBecomeOwner);
-		executive->setFunction2("ProcessInteractive.prototype.linkOwner(processInteractive)", processInteractiveLinkOwner);
-		executive->setFunction2("ProcessInteractive.prototype.unLinkOwner(processInteractive)", processInteractiveUnLinkOwner);
-		executive->setFunction2("ProcessInteractive.prototype.transferOwner(processInteractive)", processInteractiveTransferOwner);
 		executive->setFunction2("ProcessInteractive.prototype.join()", processInteractiveJoin);
 		executive->setFunction2("ProcessInteractive.prototype.isRunning()", processInteractiveIsRunning);
 		executive->setFunction2("ProcessInteractive.prototype.getReturnValue()", processInteractiveGetReturnValue);

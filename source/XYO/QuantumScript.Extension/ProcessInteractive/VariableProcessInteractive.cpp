@@ -40,12 +40,6 @@ namespace XYO::QuantumScript::Extension::ProcessInteractive {
 		value.close();
 	};
 
-	Variable *VariableProcessInteractive::clone(SymbolList &inSymbolList) {
-		VariableProcessInteractive *out = (VariableProcessInteractive *)newVariable();
-		out->value.becomeOwner(value);
-		return out;
-	};
-
 	bool VariableProcessInteractive::toBoolean() {
 		return true;
 	};

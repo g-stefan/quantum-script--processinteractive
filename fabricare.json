@@ -23,7 +23,6 @@
 					"quantum-script--processinteractive"
 				]
 			}
-		],
-		"hasGithub" : true
+		]
 	}
 }

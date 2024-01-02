@@ -18,7 +18,7 @@ ProcessInteractive.prototype.isRunning();
 ProcessInteractive.prototype.getReturnValue();
 ProcessInteractive.prototype.useConPTY(value);
 ProcessInteractive.run(cmd,useConPTY);
-ProcessInteractive.runLn(cmd,fn,useConPTY);
+ProcessInteractive.runLn(cmd,fn,useConPTY,lineMaxLn);
 ```
 
 ## License

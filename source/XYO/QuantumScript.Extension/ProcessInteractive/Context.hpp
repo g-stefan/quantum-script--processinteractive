@@ -14,7 +14,7 @@
 namespace XYO::QuantumScript::Extension::ProcessInteractive {
 
 	class ProcessInteractiveContext : public Object {
-			XYO_DISALLOW_COPY_ASSIGN_MOVE(ProcessInteractiveContext);
+			XYO_PLATFORM_DISALLOW_COPY_ASSIGN_MOVE(ProcessInteractiveContext);
 
 		public:
 			Symbol symbolFunctionProcessInteractive;

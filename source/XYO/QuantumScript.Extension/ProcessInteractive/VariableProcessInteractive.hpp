@@ -26,7 +26,7 @@ namespace XYO::ManagedMemory {
 namespace XYO::QuantumScript::Extension::ProcessInteractive {
 
 	class VariableProcessInteractive : public Variable {
-			XYO_DISALLOW_COPY_ASSIGN_MOVE(VariableProcessInteractive);
+			XYO_PLATFORM_DISALLOW_COPY_ASSIGN_MOVE(VariableProcessInteractive);
 			XYO_DYNAMIC_TYPE_DEFINE(XYO_QUANTUMSCRIPT_EXTENSION_PROCESSINTERACTIVE_EXPORT, VariableProcessInteractive);
 
 		protected:

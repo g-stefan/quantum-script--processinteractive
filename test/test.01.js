@@ -15,7 +15,7 @@ index=0;
 var map=["-","\\","|","/"];
 
 while(process.isRunning()) {
-	if(process.waitToRead(10)) {
+	if(process.waitToRead(10) > 0) {
 		var info=process.readLn();
 		if(info){
 			Console.write(info);

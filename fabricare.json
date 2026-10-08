@@ -1,5 +1,6 @@
 {
 	"solution": {
+		"namespace" : "xyo",
 		"name" : "quantum-script--processinteractive",
 		"type" : "xyo-cpp",
 		"projects": [

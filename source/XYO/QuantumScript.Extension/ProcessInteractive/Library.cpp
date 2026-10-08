@@ -356,7 +356,12 @@ namespace XYO::QuantumScript::Extension::ProcessInteractive {
 		printf("- processinteractive-run\n");
 #endif
 		String retV;
-		if (XYO::System::ProcessInteractive::run(arguments->index(0)->toString(), retV, arguments->index(0)->toBoolean())) {
+		// run(cmd, useConPTY), useConPTY is optional, true if missing (the C++ default)
+		bool useConPTY = true;
+		if (!TIsTypeExact<VariableUndefined>(arguments->index(1))) {
+			useConPTY = arguments->index(1)->toBoolean();
+		};
+		if (XYO::System::ProcessInteractive::run(arguments->index(0)->toString(), retV, useConPTY)) {
 			return VariableString::newVariable(retV);
 		};
 
@@ -387,7 +392,7 @@ namespace XYO::QuantumScript::Extension::ProcessInteractive {
 		executive->setFunction2("ProcessInteractive.prototype.write(str)", processInteractiveWrite);
 		executive->setFunction2("ProcessInteractive.prototype.writeLn(str)", processInteractiveWriteLn);
 		executive->setFunction2("ProcessInteractive.prototype.close()", processInteractiveClose);
-		executive->setFunction2("ProcessInteractive.prototype.terminate(waitMicroSec)", processInteractiveTerminate);
+		executive->setFunction2("ProcessInteractive.prototype.terminate(waitMilliseconds)", processInteractiveTerminate);
 		executive->setFunction2("ProcessInteractive.prototype.waitToRead(microSec)", processInteractiveWaitToRead);
 		executive->setFunction2("ProcessInteractive.prototype.readToBuffer(buffer)", processInteractiveReadToBuffer);
 		executive->setFunction2("ProcessInteractive.prototype.writeFromBuffer(buffer)", processInteractiveWriteFromBuffer);
